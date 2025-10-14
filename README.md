@@ -1,3 +1,8 @@
+"scripts": {
+  "dev": "next dev",
+  "build": "next build",
+  "start": "next start"
+}
 # Artisan-Connect
 Artisans Connect 
 # Paystack Integration Guide
