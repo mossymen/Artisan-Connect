@@ -3,9 +3,46 @@
 
 ---
 
+{
+  "name": "my-node-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": ">=18.x"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "firebase-admin": "^12.0.0"
+  }
+}
+
+{
+  "projects": {
+    "default": "your-project-id"
+  }
+}
+
+{
+  "hosting": {
+    "public": "public",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "**",
+        "function": "app"
+      }
+    ]
+  }
+}
+
+
 ## 📂 PROJECT STRUCTURE
 
 Create this exact folder structure:
+
 
 ```
 ekpoma-artisan-connect/
