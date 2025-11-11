@@ -16,8 +16,42 @@
   "dependencies": {
     "express": "^4.18.2",
     "firebase-admin": "^12.0.0"
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3"
   }
 }
+
+const express = require('express');
+const cors = require('cors');
+const dotenv = require('dotenv');
+const admin = require('firebase-admin');
+
+dotenv.config();
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+// Firebase setup using service account (stored as env variable)
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: process.env.FIREBASE_DATABASE_URL
+});
+
+app.get('/', (req, res) => {
+  res.send('🚀 Node.js app deployed via Render + GitHub + Firebase!');
+});
+
+app.get('/data', async (req, res) => {
+  const db = admin.firestore();
+  const snapshot = await db.collection('sample').get();
+  const data = snapshot.docs.map(doc => doc.data());
+  res.json(data);
+});
+
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 {
   "projects": {
