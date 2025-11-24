@@ -1,76 +1,23 @@
-# Complete Ekpoma Artisan Connect - Ready for Deployment
-## All Files Configured and Ready to Copy
-
----
-
 {
-  "name": "my-node-app",
+  "name": "my-app-backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node index.js"
-  },
-  "engines": {
-    "node": ">=18.x"
-  },
-  "dependencies": {
-    "express": "^4.18.2",
-    "firebase-admin": "^12.0.0"
-    "cors": "^2.8.5",
-    "dotenv": "^16.0.3"
+    "start": "node server.js"
   }
 }
 
-const express = require('express');
-const cors = require('cors');
-const dotenv = require('dotenv');
-const admin = require('firebase-admin');
-
-dotenv.config();
+const express = require("express");
 const app = express();
-app.use(cors());
-app.use(express.json());
+const PORT = process.env.PORT || 3000;
 
-// Firebase setup using service account (stored as env variable)
-const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: process.env.FIREBASE_DATABASE_URL
+app.get("/", (req, res) => {
+  res.send("Backend running on Render");
 });
 
-app.get('/', (req, res) => {
-  res.send('🚀 Node.js app deployed via Render + GitHub + Firebase!');
-});
+app.listen(PORT, () => console.log(`Server running on PORT ${PORT}`));
 
-app.get('/data', async (req, res) => {
-  const db = admin.firestore();
-  const snapshot = await db.collection('sample').get();
-  const data = snapshot.docs.map(doc => doc.data());
-  res.json(data);
-});
 
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
-{
-  "projects": {
-    "default": "your-project-id"
-  }
-}
-
-{
-  "hosting": {
-    "public": "public",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-    "rewrites": [
-      {
-        "source": "**",
-        "function": "app"
-      }
-    ]
-  }
-}
 
 
 ## 📂 PROJECT STRUCTURE
