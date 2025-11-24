@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: my-node-backend
+    env: node
+    region: frankfurt
+    branch: main
+    plan: free
+    buildCommand: "npm install"
+    startCommand: "npm start"
+    autoDeploy: true
