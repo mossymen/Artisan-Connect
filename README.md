@@ -1,24 +1,3 @@
-{
-  "name": "my-app-backend",
-  "version": "1.0.0",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js"
-  }
-}
-
-const express = require("express");
-const app = express();
-const PORT = process.env.PORT || 3000;
-
-app.get("/", (req, res) => {
-  res.send("Backend running on Render");
-});
-
-app.listen(PORT, () => console.log(`Server running on PORT ${PORT}`));
-
-
-
 
 ## 📂 PROJECT STRUCTURE
 
